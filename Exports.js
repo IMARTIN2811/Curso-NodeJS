@@ -1,6 +1,6 @@
 function parse(req){
-    var arregloParametros = [], parametros = {};
-        
+    var arregloParametros = [], parametros = {};   
+         
         if(req.url.indexOf("?") > 0){
             // /?nombre=Uriel
             var url_data = req.url.split("?");
