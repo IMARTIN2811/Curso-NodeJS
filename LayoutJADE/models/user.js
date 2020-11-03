@@ -12,8 +12,10 @@ var useSchema = new Schema({
     dateOfBirth: Date
 });
 
+//Se crea el modelo
+var User = mongoose.model("User", useSchema);
+module.exports.User = User;
 /*
  *Tipos de datos para definir un documento
  *String, Numbre, Date, Buffer, Boolean, Mixed, Objectid, Array
  */
-
