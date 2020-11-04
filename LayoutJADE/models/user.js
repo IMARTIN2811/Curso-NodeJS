@@ -2,6 +2,7 @@
 var mongoose = require("mongoose");
 //Se declara el esquema
 var Schema = mongoose.Schema;
+
 //Crea el esquema y pasa la estructura del documento
 var useSchema = new Schema({
     name: String,
@@ -10,6 +11,13 @@ var useSchema = new Schema({
     age : Number,
     email: String,
     dateOfBirth: Date
+});
+
+//se crea el virtual
+useSchema.virtual("password_confirmation").get(function(){
+    return this.p_c;
+}).set(function(password){
+    this.p_c = password;
 });
 
 //Se crea el modelo
