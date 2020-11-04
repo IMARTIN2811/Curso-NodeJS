@@ -12,7 +12,7 @@ var useSchema = new Schema({
     name: String,
     lastName: String,
     //Hace las validaciones
-    userName: {
+    username: {
         type: String,required:true,maxlength:[50,"El usuario es muy grande"]
     },
     password: {

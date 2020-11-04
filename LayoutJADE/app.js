@@ -55,13 +55,23 @@ app.get("/login", function(req,res){
 app.post("/users", function(req,res) {
     //console.log("Contraseña:"+ req.body.password);
     //console.log("Email:"+ req.body.email);
-    var user = new User({email: req.body.email, 
+    var user = new User({   email: req.body.email, 
                             password: req.body.password,
                             password_confirmation: req.body.password_confirmation,
                             username: req.body.username
                         });
-    console.log(user.password_confirmation);
     
+    //metodo save con promises                    
+    user.save().then(function(us){
+        res.send("Guardamos tus datos");
+    }, function(err) {
+        if (err) {
+            console.log(String(err));
+            res.send("No pudimos guardar la informacion");
+        }
+    });
+  
+/*
     //guarda los datos
     user.save(function(err){
         if (err) {
@@ -69,6 +79,6 @@ app.post("/users", function(req,res) {
         }
         res.send("Guardamos tus datos");
     });
+    */
 });
-
 app.listen(8080);
