@@ -44,14 +44,32 @@ app.get("/", function(req,res){
 });
 //especifica la ruta y mandar una funcion que recibe dos paramteros,
 //una de la peticion una de respuesta
-app.get("/login", function(req,res){
+app.get("/signup", function(req,res){
     User.find(function(err,doc){
         console.log(doc);
-        res.render("login");
+        res.render("signup");
     });
+});
+//especifica la ruta y mandar una funcion que recibe dos paramteros,
+//una de la peticion una de respuesta
+app.get("/login", function(req,res){
+    res.render("login");
 });
 
 //Se declara metodo post y envia los datos 
+app.post("/sessions", function(req,res) {
+    //Se declara el metodo find y devuelve los documentos
+    //find: te trae multiples documentos, findOne: te trae un solo documento
+    User.findOne({email: req.body.email,password: req.body.password },function(err,docs){
+        console.log(docs);
+        res.send("Hola mundo");
+    });
+});
+app.listen(8080);
+
+/*
+//Para registro de usuarios 
+//Se declara metodo post y envia los datos,
 app.post("/users", function(req,res) {
     //console.log("Contraseña:"+ req.body.password);
     //console.log("Email:"+ req.body.email);
@@ -70,8 +88,6 @@ app.post("/users", function(req,res) {
             res.send("No pudimos guardar la informacion");
         }
     });
-  
-/*
     //guarda los datos
     user.save(function(err){
         if (err) {
@@ -79,6 +95,5 @@ app.post("/users", function(req,res) {
         }
         res.send("Guardamos tus datos");
     });
-    */
 });
-app.listen(8080);
+*/
