@@ -3,7 +3,7 @@ var express = require("express");
 var router = express.Router();
 
 //se crea la ruta
-router.get("/", function (req,res) {
+router.get("/", function(req,res) {
     res.render("app/home")
 });
 
