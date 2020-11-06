@@ -10,6 +10,8 @@ var Schema = mongoose.Schema;
 //var User = require("./models/user").User;
 //se declara el session
 var session = require("express-session");
+//se importa la ruta
+var router_app = require("./routes_app");
 
 //Se hace la conexion
 mongoose.connect("mongodb://localhost");
@@ -37,7 +39,7 @@ var user_Schema = new Schema(userSchemaJSON);
 var User = mongoose.model("User",user_Schema);
 
 //se declara el middleware y carga los archvos estaticos
-app.use("/estatico",express.static('public'));
+app.use("/public",express.static('public'));
 app.use(express.static('assets'));
 //para peticiones aplication/json
 app.use(bodyParser.json());
@@ -83,6 +85,10 @@ app.post("/sessions", function(req,res) {
         res.send("Hola mundo");
     });
 });
+
+//Se cargan las rutas
+app.use("/app",router_app);
+
 app.listen(8080);
 
 /*
