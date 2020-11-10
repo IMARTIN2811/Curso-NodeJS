@@ -4,8 +4,10 @@ var app = express();
 var bodyParser = require("body-parser");
 //importa el archivo de validaciones
 var User = require("./models/user").User;
-//se declara el session
-var session = require("express-session");
+//se reemplaza la session por cookieSession
+//var session = require("express-session");
+//se declara el cookiesession
+var cookieSession = require("cookie-session");
 //se importa la ruta
 var router_app = require("./routes_app");
 //se crea la variable e importar el arhchico para almacenar el middleware
@@ -18,13 +20,21 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "jade");
 
+/** 
 //Se define el middleware de la sesion
 app.use(session({
     secret: "123byuhbsdah12ub",
     resave: false,
     saveUninitialized: false
 }));
-
+*/
+//ejecuta el cookiesession
+app.use(cookieSession({
+    //Pasa los parametros, estos son claves para la forma en la cual se transmite
+    //la comunicacion entre el cliente y server
+    name: "session",
+    keys: ["llave-1", "llave-2"]
+}));
 //especifica la ruta y mandar una funcion que recibe dos paramteros,
 //una de la peticion una de respuesta
 app.get("/", function(req,res){
