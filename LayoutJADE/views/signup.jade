@@ -1,6 +1,6 @@
 extends ./layout.jade
 block contenido
-
+    div(class="col-md-6 remove-float center-block")
     form(action="/users", method="post")
         div(class="form-group")
             label(for="email") Email
@@ -18,5 +18,8 @@ block contenido
             label(for="username") Usuario
             input(type="text", name="username", placeholder="Nombre de usuario", id="username" 
             class="form-control")
-        div
-            input(type="submit", value="Iniciar sesion" class="btn btn-info")
+        div(class="row top-space ")
+            div(class="col-xs-12 col-sm-6")
+                input(type="submit" value="Iniciar sesion" class="btn btn-info")
+            div(class="col-xs-12 col-sm-6 text-right")
+                a(href="/login") Ya tengo una cuenta
