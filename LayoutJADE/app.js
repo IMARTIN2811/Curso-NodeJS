@@ -2,43 +2,15 @@ var express = require("express");
 var app = express();
 //se importa la libreria
 var bodyParser = require("body-parser");
-//se importa la libreria
-var mongoose = require("mongoose");
-//Se declara el esquema
-var Schema = mongoose.Schema;
 //importa el archivo de validaciones
-//var User = require("./models/user").User;
+var User = require("./models/user").User;
 //se declara el session
 var session = require("express-session");
 //se importa la ruta
 var router_app = require("./routes_app");
+//se crea la variable e importar el arhchico para almacenar el middleware
+var session_middleware = require("./middlewares/session")
 
-//Se hace la conexion
-mongoose.connect("mongodb://localhost");
-var db = mongoose.connection
-
-//Si la conexion en incorecta marca un errro
-db.on('error', function(err){
-  console.log('connection error', err)
-})
-
-//Verifica la conexion a BD
-db.once('open', function(){
-  console.log('Connection to DB successful')
-})
-
-//Se genera los objetos del documento
-var userSchemaJSON = {
-    email:String,
-    password:String
-};
-
-//Crea el esquema y pasa la estrucutura del documento
-var user_Schema = new Schema(userSchemaJSON);
-//Se crea el modelo para establecer la conexion
-var User = mongoose.model("User",user_Schema);
-
-//se declara el middleware y carga los archvos estaticos
 app.use("/public",express.static('public'));
 app.use(express.static('assets'));
 //para peticiones aplication/json
@@ -82,10 +54,12 @@ app.post("/sessions", function(req,res) {
     User.findOne({email: req.body.email,
                   password: req.body.password },function(err,user){
         req.session.user_id = user._id;
-        res.send("Hola mundo");
+        res.redirect("/app");
     });
 });
 
+//se carga el middleware creado
+app.use("/app",session_middleware);
 //Se cargan las rutas
 app.use("/app",router_app);
 
