@@ -28,6 +28,7 @@ app.use(session({
     saveUninitialized: false
 }));
 */
+
 //ejecuta el cookiesession
 app.use(cookieSession({
     //Pasa los parametros, estos son claves para la forma en la cual se transmite
@@ -35,6 +36,7 @@ app.use(cookieSession({
     name: "session",
     keys: ["llave-1", "llave-2"]
 }));
+
 //especifica la ruta y mandar una funcion que recibe dos paramteros,
 //una de la peticion una de respuesta
 app.get("/", function(req,res){
