@@ -1,7 +1,6 @@
 .right-space{
     /*Agregar margen a la derecha*/
-    margin-right: 1em;
-    
+    margin-right: 1em; 
 }
 .remove-float{
     float: none; 
@@ -11,12 +10,61 @@
 margin-top: 1.5em;
 margin: auto;
 }
-/*Centrar el texto del menu con div*/
+/*Centrar el texto del menu con div
 div{width:50%;border:1px ;padding:8px;margin:auto;}
 		center{margin:16px 0;}
-/*Para margen de arriba*/
+
+        /*Para margen de arriba*/
 .big-top-space{
     margin-top: 200px;
 }
 
 H1 { text-align: center}
+
+/*Crea el banner*/
+.large-padding{
+    padding: 20px 15px;
+}
+.black{
+    background-color: #222;
+}
+/*Fin del banner*/
+
+/*Color de la letra del menu de opciones*/
+.white-text{
+    color:white
+}
+/*Alinea el menu a la derecha*/
+nav{
+    text-align: right;
+}
+/*Alineacion de las letras del menu de opciones*/
+nav li{
+    display: inline-block;
+    margin-right: 1em;
+    font-size: 1.1em;
+}
+nav li a{
+    color: white;
+}
+/*Hace que no altere el color de las letras del menu cuando pase el mouse*/
+nav li a:hover{
+    color: white;
+}
+.white{
+    background-color: white;
+}
+.border{
+    border: solid 1px #eee;
+}
+.tr:nth-of-type(odd){
+    background-color: #eee;
+}
+form.link{
+    display: inline-block;
+}
+form.link input[type="submit"]{
+    background-color: transparent;
+    border: none;
+    color: rgb(200,50,50);
+}
