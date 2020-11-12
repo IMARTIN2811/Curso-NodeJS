@@ -12,6 +12,8 @@ var cookieSession = require("cookie-session");
 var router_app = require("./routes_app");
 //se crea la variable e importar el arhchico para almacenar el middleware
 var session_middleware = require("./middlewares/session")
+//se importa el metodo override
+var methodOverride = require("method-override");
 
 app.use("/public",express.static('public'));
 app.use(express.static('assets'));
@@ -19,6 +21,8 @@ app.use(express.static('assets'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "jade");
+//se manda llamar el metodo del form edit.jade
+app.use(methodOverride("_method"));
 
 /** 
 //Se define el middleware de la sesion
