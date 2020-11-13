@@ -1,4 +1,6 @@
 var Imagen = require("../models/imagenes");
+//Se importa el archivo image_permission
+var owner_check = require("./image_permission"); 
 
 //se declara el middleware y se exporta
 module.exports = function(req,res,next) {
@@ -7,7 +9,7 @@ module.exports = function(req,res,next) {
         .populate("creator")
         .exec(function(err,imagen) {
             //valida si encuentra la imagen 
-            if (imagen != null) {
+            if (imagen != null && owner_check(imagen,req,res)) {
                 //console.log("Encontre la imagen"+ imagen.creator);
                 res.locals.imagen = imagen;
                 next();
