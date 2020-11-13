@@ -14,12 +14,14 @@ var router_app = require("./routes_app");
 var session_middleware = require("./middlewares/session")
 //se importa el metodo override
 var methodOverride = require("method-override");
+//se declara el express-formidable
+var formdata = require("express-form-data");
 
 app.use("/public",express.static('public'));
 app.use(express.static('assets'));
 //para peticiones aplication/json
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.urlencoded({extended: true }));
 app.set("view engine", "jade");
 //se manda llamar el metodo del form edit.jade
 app.use(methodOverride("_method"));
@@ -40,6 +42,9 @@ app.use(cookieSession({
     name: "session",
     keys: ["llave-1", "llave-2"]
 }));
+
+//Se ejecuta el formidable
+app.use(formdata.parse({ keepExtensions: true}));
 
 //especifica la ruta y mandar una funcion que recibe dos paramteros,
 //una de la peticion una de respuesta
