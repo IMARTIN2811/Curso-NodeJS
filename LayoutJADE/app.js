@@ -5,17 +5,35 @@ var bodyParser = require("body-parser");
 //importa el archivo de validaciones
 var User = require("./models/user").User;
 //se reemplaza la session por cookieSession
-//var session = require("express-session");
+var session = require('express-session');
 //se declara el cookiesession
-var cookieSession = require("cookie-session");
+//var cookieSession = require("cookie-session");
 //se importa la ruta
 var router_app = require("./routes_app");
 //se crea la variable e importar el arhchico para almacenar el middleware
-var session_middleware = require("./middlewares/session")
+var session_middleware = require("./middlewares/session");
 //se importa el metodo override
 var methodOverride = require("method-override");
 //se declara el express-formidable
 var formdata = require("express-form-data");
+
+//Se declaran las variable para la conexion a redis
+const redis = require('redis');
+var RedisStore = require('connect-redis')(session);
+var redisClient = redis.createClient();
+//Fin de las variables
+
+//configuracion de redis
+var sessionMiddleware = session({ 
+    store: new RedisStore ({ 
+        host: 'localhost', 
+        port:6379, 
+        client: redisClient, 
+        ttl:86400 }),
+        secret: "Super Ultra Secret Word"
+});
+//pasar el metodo a express para almacenar la sesion
+app.use(sessionMiddleware);
 
 app.use("/public",express.static('public'));
 app.use(express.static('assets'));
@@ -34,7 +52,7 @@ app.use(session({
     saveUninitialized: false
 }));
 */
-
+/*
 //ejecuta el cookiesession
 app.use(cookieSession({
     //Pasa los parametros, estos son claves para la forma en la cual se transmite
@@ -42,6 +60,7 @@ app.use(cookieSession({
     name: "session",
     keys: ["llave-1", "llave-2"]
 }));
+ */
 
 //Se ejecuta el formidable
 app.use(formdata.parse({ keepExtensions: true}));
