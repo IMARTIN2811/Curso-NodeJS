@@ -16,12 +16,18 @@ var session_middleware = require("./middlewares/session");
 var methodOverride = require("method-override");
 //se declara el express-formidable
 var formdata = require("express-form-data");
-
 //Se declaran las variable para la conexion a redis
 const redis = require('redis');
 var RedisStore = require('connect-redis')(session);
 var redisClient = redis.createClient();
 //Fin de las variables
+
+//se declara la instancia http para realtime.js
+var http = require("http");
+//se importa el archivo realtime
+var realtime = require("./realtime");
+//se declara un nuevo server
+var server = http.Server(app);
 
 //configuracion de redis
 var sessionMiddleware = session({ 
@@ -32,6 +38,9 @@ var sessionMiddleware = session({
         ttl:86400 }),
         secret: "Super Ultra Secret Word"
 });
+//se pasa el servidor y la session
+realtime(server,sessionMiddleware);
+
 //pasar el metodo a express para almacenar la sesion
 app.use(sessionMiddleware);
 
@@ -103,7 +112,8 @@ app.use("/app",session_middleware);
 //Se cargan las rutas
 app.use("/app",router_app);
 
-app.listen(8080);
+//app.listen(8080);
+server.listen(8080);
 
 /*
 //Para registro de usuarios 
