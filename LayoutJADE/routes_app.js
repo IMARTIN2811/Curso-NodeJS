@@ -7,6 +7,11 @@ var Imagen =  require("./models/imagenes");
 var imageFinder = require("./middlewares/find_images");
 //se importa el modulo fs
 var fs = require("fs");
+//se importa  la libreria
+var redis = require("redis");
+
+//crear un nuevo cliente
+var client = redis.createClient();
 
 //se crea la ruta
 router.get("/", function(req,res) {
@@ -107,6 +112,15 @@ router.route("/imagenes")
         imagen.save(function(err){
             //sino hay un error rediccionara a la ruta imagenes
             if (!err) {
+                //se crea el formato del documento
+                var imgJSON = {
+                    "id" : imagen._id,
+                    "title" : imagen.title,
+                    "extension" : imagen.extension 
+                };
+                //publica la img utilizando el cliente creado de redis
+                client.publish("images",JSON.stringify(imgJSON));
+                //client.publish("images",imagen.toString());
                 //fs mueve la imagen a la carpeta public/images
                 fs.rename(req.files.archivo.path, "public/imagenes/"+imagen._id+"."+extension,
                 function(err) {
