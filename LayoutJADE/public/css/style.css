@@ -19,7 +19,8 @@ div{width:50%;border:1px ;padding:8px;margin:auto;}
     margin-top: 200px;
 }
 
-H1 { text-align: center}
+/*h1 { text-align: center}
+*/
 
 /*Crea el banner*/
 .large-padding{
@@ -68,22 +69,36 @@ form.link input[type="submit"]{
     border: none;
     color: rgb(200,50,50);
 }
+
+/*Contenedor donde se muesra la info. de las imagenes*/
 .img-container{
-    width: 700px;
+    text-align: center;
+    width: 500px;
     max-width: 100%;
     margin: 0 auto;
+    background-color: rgb(103, 114, 103);
 }
-.img-container h1,.img-container h2{
+/* H4 Cambia el titulo de las imagenes*/
+.img-container h4,.img-container h2{
     padding: 15px;
     border-bottom: 1px solid #222;
 }
+/*Alinea la informacion del autor de la imagen*/
 .img-container p{
     text-align: right;
     font-size: 1.2em;
     margin-top: 1em;
 }
+/*imagen no supere los 100% del contenedor*/
 img{
-    max-width: 100%;
     width: 100%;
-    height:100%;
+
+}
+/*tamaño de todas las imgenes*/
+.img-ts{
+    width: 350px;
+    height: 300px;   
+}
+#galeria img:hover{
+    border: 5px solid #f7f7f7;
 }

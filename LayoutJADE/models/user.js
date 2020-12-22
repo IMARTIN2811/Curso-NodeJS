@@ -1,3 +1,6 @@
+var express = require("express");
+var bodyParser = require("body-parser");
+
 //Se declara la libreria 
 var mongoose = require("mongoose");
 //Se declara el esquema
@@ -15,6 +18,7 @@ db.on('error', function(err){
 db.once('open', function(){
   console.log('Connection to DB successful')
 });
+
 /* 
 //Se genera los objetos del documento
 var userSchemaJSON = {
@@ -27,6 +31,7 @@ var user_Schema = new Schema(userSchemaJSON);
 //Se crea el modelo para establecer la conexion
 var User = mongoose.model("User",user_Schema);
 */
+
 //se declara el array y se le asigna dos valores
 var posiblesValores = ["M","F"];
 //valida el formato del email
